@@ -49,7 +49,6 @@ def print_menu_map():
     sys.stderr.write("   -v  INT          verbose level: 1=error, 2=warning, 3=message, 4+=debugging [3]\n")
     sys.stderr.write("   -y  STR          type of read counts [insert.scaled_counts]\n")
     sys.stderr.write("                    Values: [base.coverage, insert.raw_counts, insert.scaled_counts]\n\n")
-    sys.exit(0)
 
 
 
@@ -95,8 +94,14 @@ def print_parse(version_tool):
 
     # print menu for the commands
     if args.command == 'map':
-        if (args.forwardReads is None and args.reverseReads is None ) or args.singleReads is None:
+        if args.forwardReads is None and args.reverseReads is None and args.singleReads is None:
             print_menu_map()
+            sys.stderr.write("[E:main] Missing -s or -f/-r\n")
+            sys.exit(0)
+        if args.db is None:
+            print_menu_map()
+            sys.stderr.write("[E:main] Missing -db.\n")
+            sys.exit(0)
     if args.command == 'index':
         execute_menus.index(args)
     if args.command == 'merge':
