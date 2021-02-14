@@ -1,0 +1,42 @@
+#!/usr/bin/env python
+
+version_tool = "0.0"
+
+# import -----------------------------------------------------------------------
+import os
+import sys
+
+# position of the script -------------------------------------------------------
+path_this = os.path.realpath(__file__)
+path_array = path_this.split("/")
+relative_path = "/".join(path_array[0:-1])
+relative_path = relative_path + "/"
+
+# add /bin to the path ---------------------------------------------------------
+try:
+    if os.path.isdir(relative_path+'bin'):
+        sys.path.insert(0, relative_path+'bin')
+    else:
+        sys.stderr.write("[E::main] Error: "+relative_path+"bin directory is missing.\n")
+        sys.exit(1)
+except:
+    sys.stderr.write("[E::main] Error: "+relative_path+"bin directory is missing.\n")
+    sys.exit(1)
+try:
+    import map_genes_to_mOTUs as map_motu
+except:
+    sys.stderr.write("[E::main] Error: fail to load the script: "+relative_path+"bin/map_genes_to_mOTUs.py\n")
+    sys.exit(1)
+try:
+    import runBWA as runbwa
+except ImportError:
+    sys.stderr.write("[E::main] Error: fail to load the script: "+relative_path+"bin/runBWA.py\n")
+    sys.exit(1)
+try:
+    import argparser as argparser
+except ImportError:
+    sys.stderr.write("[E::main] Error: fail to load the script: "+relative_path+"bin/argparser.py\n")
+    sys.exit(1)
+
+# print arg menu ---------------------------------------------------------------
+args = argparser.print_parse(version_tool)
