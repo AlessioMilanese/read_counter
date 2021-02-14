@@ -37,6 +37,19 @@ try:
 except ImportError:
     sys.stderr.write("[E::main] Error: fail to load the script: "+relative_path+"bin/argparser.py\n")
     sys.exit(1)
+try:
+    import execute_menus as execute_menus
+except ImportError:
+    sys.stderr.write("[E::main] Error: fail to load the script: "+relative_path+"bin/execute_menus.py\n")
+    sys.exit(1)
 
 # save args and print menu -----------------------------------------------------
 args = argparser.print_parse(version_tool)
+
+# select the correct command
+if args.command == 'map':
+    execute_menus.map(args)
+if args.command == 'index':
+    execute_menus.index(args)
+if args.command == 'merge':
+    execute_menus.merge(args)
