@@ -27,6 +27,33 @@ Type read_counter <command> to print the help for a specific command
         '''
     return str_msg
 
+
+
+
+# secondary menus --------------------------------------------------------------
+def print_menu_map():
+    sys.stderr.write("\n")
+    sys.stderr.write("Usage: read_counter map -db <database> [options]\n\n")
+    sys.stderr.write("Input options:\n")
+    sys.stderr.write("   -f  FILE[,FILE]  input file(s) for reads in forward orientation, fastq formatted\n")
+    sys.stderr.write("   -r  FILE[,FILE]  input file(s) for reads in reverse orientation, fastq formatted\n")
+    sys.stderr.write("   -s  FILE[,FILE]  input file(s) for reads without mate, fastq formatted\n")
+    sys.stderr.write("   -n  STR          sample name [default: file name]\n")
+    sys.stderr.write("   -db DIR          provide a database created with `read_counter index` [required]\n\n")
+    sys.stderr.write("Output options:\n")
+    sys.stderr.write("   -o  FILE         output file name [stdout]\n")
+    sys.stderr.write("   -I  FILE         save the result of bwa in bam format (intermediate step) [None]\n\n")
+    sys.stderr.write("Algorithm options:\n")
+    sys.stderr.write("   -l  INT          min. length of alignment for the reads (number of nucleotides) [75]\n")
+    sys.stderr.write("   -t  INT          number of threads [1]\n")
+    sys.stderr.write("   -v  INT          verbose level: 1=error, 2=warning, 3=message, 4+=debugging [3]\n")
+    sys.stderr.write("   -y  STR          type of read counts [insert.scaled_counts]\n")
+    sys.stderr.write("                    Values: [base.coverage, insert.raw_counts, insert.scaled_counts]\n\n")
+    sys.exit(0)
+
+
+
+
 # main function ----------------------------------------------------------------
 def print_parse(version_tool):
     global version_tool_this
@@ -67,6 +94,13 @@ def print_parse(version_tool):
     args = parser.parse_args()
 
     # print menu for the commands
+    if args.command == 'map':
+        if (args.forwardReads is None and args.reverseReads is None ) or args.singleReads is None:
+            print_menu_map()
+    if args.command == 'index':
+        execute_menus.index(args)
+    if args.command == 'merge':
+        execute_menus.merge(args)
 
     # return args
     return args
