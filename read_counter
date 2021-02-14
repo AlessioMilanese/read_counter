@@ -38,5 +38,5 @@ except ImportError:
     sys.stderr.write("[E::main] Error: fail to load the script: "+relative_path+"bin/argparser.py\n")
     sys.exit(1)
 
-# print arg menu ---------------------------------------------------------------
+# save args and print menu -----------------------------------------------------
 args = argparser.print_parse(version_tool)

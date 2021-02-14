@@ -70,4 +70,5 @@ def print_parse(version_tool):
 
     # print menu for the commands
 
+    # return args
     return args
