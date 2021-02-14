@@ -38,7 +38,6 @@ def print_parse(version_tool):
     parser.add_argument('-f', action="store", default=None,dest='forwardReads', help='name of input file for reads in forward orientation, fastq formatted, can be gzipped')
     parser.add_argument('-r', action="store", default=None,dest='reverseReads', help='name of input file for reads in reverse orientation, fastq formatted, can be gzipped')
     parser.add_argument('-s', action="store", default=None,dest='singleReads', help='name of input file for reads without mate, fastq formatted, can be gzipped')
-    parser.add_argument('-i', action="store", dest='listInputFiles', default=None, help='name of input file(s); sam or bam formatted files. If it is a list: insert all files separated by a comma')
     parser.add_argument('-db', action="store", default=None, dest='db', help='database of marker genes')
     parser.add_argument('-n', action="store", dest='sampleName', default=None, help='sample name for the current mapping')
 
