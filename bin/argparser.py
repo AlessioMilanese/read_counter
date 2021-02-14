@@ -94,18 +94,35 @@ def print_parse(version_tool):
 
     # print menu for the commands
     if args.command == 'map':
+        # check that there is an input
         if args.forwardReads is None and args.reverseReads is None and args.singleReads is None:
             print_menu_map()
             sys.stderr.write("[E:main] Missing -s or -f/-r\n")
             sys.exit(0)
+        # check that for and rev reads are present togehter
+        if (args.forwardReads is not None) and (args.reverseReads is None):
+            sys.stderr.write("[E::map_db] Error: reverse reads (-r) missing\n")
+            sys.exit(1)
+        if (args.forwardReads is None) and (args.reverseReads is not None):
+            sys.stderr.write("[E::map_db] Error: reverse reads (-f) missing\n")
+            sys.exit(1)
+        # check the db
         if args.db is None:
             print_menu_map()
             sys.stderr.write("[E:main] Missing -db.\n")
             sys.exit(0)
+
+
     if args.command == 'index':
         execute_menus.index(args)
     if args.command == 'merge':
         execute_menus.merge(args)
+
+    # set defaults -------------------------------------------------------------
+    if (args.verbose is None): args.verbose = 3
+    if (args.threads is None): args.threads = 1
+    if (args.type_output is None): args.type_output = 'insert.scaled_counts'
+    if (args.min_len_align_length is None): args.min_len_align_length = 75
 
     # return args
     return args
