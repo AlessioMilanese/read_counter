@@ -3,7 +3,7 @@ import sys
 
 version_tool_this = "dummy"
 
-# message ----------------------------------------------------------------------
+# main message -----------------------------------------------------------------
 class CapitalisedHelpFormatter(argparse.HelpFormatter):
     def add_usage(self, usage, actions, groups, prefix=None):
         if prefix is None:
@@ -27,6 +27,7 @@ Type read_counter <command> to print the help for a specific command
         '''
     return str_msg
 
+# main function ----------------------------------------------------------------
 def print_parse(version_tool):
     global version_tool_this
     version_tool_this = version_tool
@@ -41,12 +42,10 @@ def print_parse(version_tool):
     parser.add_argument('-db', action="store", default=None, dest='db', help='database of marker genes')
     parser.add_argument('-n', action="store", dest='sampleName', default=None, help='sample name for the current mapping')
 
-
     # output and output options
     parser.add_argument('-o', action="store", dest='output', default=None, help='name of output file')
     parser.add_argument('-v', action='store', type=int, default=None, dest='verbose', help='Verbose levels')
     parser.add_argument('-y', action="store", dest='type_output', default=None, help='type of output that you want to print',choices=['base.coverage', 'insert.raw_counts', 'insert.scaled_counts'])
-
 
     # help
     parser.add_argument('--version', action='version', version='%(prog)s {0} on python {1}'.format(version_tool, sys.version.split()[0]))

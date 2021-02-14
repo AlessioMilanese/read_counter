@@ -29,14 +29,16 @@ except ImportError:
     sys.stderr.write("[E::main] Error: fail to load the script: "+relative_path+"/runBWA.py\n")
     sys.exit(1)
 
-
-
+#################################  COMMANDS  ###################################
+# MAP command ------------------------------------------------------------------
 def map(args):
     print("as")
     return 0
 
+# INDEX command ----------------------------------------------------------------
 def index(args):
     return 0
 
+# MERGE command ----------------------------------------------------------------
 def merge(args):
     return 0
