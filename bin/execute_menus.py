@@ -188,11 +188,37 @@ def map(args):
 # INDEX command ----------------------------------------------------------------
 def index(args):
     index2.index(args.db,args.verbose)
+    sys.exit(0)
+
 
 
 
 ################################################################################
 # MERGE command ----------------------------------------------------------------
-def merge(args):
+def merge(file_list):
+    # we sort the files to have always the same order
+    file_list.sort()
 
+    headers = list()
+    values = dict()
+    for f in file_list:
+        # first we set all to zeros
+        for u in values:
+            values[u].append(0)
+        # now we check if adding new or replacing the zero we just added
+        o = open(f,"r")
+        headers.append(o.readline())
+        for line in o:
+            vals = line.rstrip().split("\t")
+            if not vals[0] in values:
+                values[u] = [0]*len(headers)
+            values[u][-1] = vals[1]
+        o.close()
+    # print result
+    print("\t".join(headers))
+    # find order for the values
+    clusters = values.keys()
+    clusters.sort()
+    for c in clusters:
+        print("\t".join([c]+clusters[c]))
     sys.exit(0)
