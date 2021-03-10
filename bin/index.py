@@ -1,5 +1,13 @@
+import subprocess
+
 def index(fasta_file, verbose):
     # we first need to run bwa index
+    bwa_index = subprocess.Popen(['bwa', 'index', fasta_file])
+
+    return_code = bwa_index.wait()
+    if return_code:
+        sys.stderr.write("[E::index] Error. bwa index failed\n")
+        sys.exit(1)
 
     # and second, create the .coord file
     w = open(fasta_file+".coord","w")
