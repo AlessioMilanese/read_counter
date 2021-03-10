@@ -166,6 +166,23 @@ gene2   0.374823
 gene3   52.34783
 ```
 
+As we said before, you can save the result to a file using the `-o` option:
+```
+read_counter map -db test/test.fasta -s sample_34_1.fq -o sample_34_1.map
+```
+
+You can filter for only reads that map with a certain number of nucleotide using the `-l` option. Example `-l 100` will select only reads that map with 100 nucleotides to a gene. Note that here it refers only to the gene sequence and not the padded region.
+
+Finally, you can decide what to count with the `-y` command:
+- `base.coverage` to evaluate the average coverage per base in the gene;
+- `insert.raw_counts` to count the number of reads that map to a gene;
+- `insert.scaled_counts` to count the number of reads that map to a gene and normalise it by the length of the gene. 
+
+
+
+
+
+
 # Advance usage: Merge
 
 The `merge` command doesn't have any option. When you call `read_counter merge`, all the files that follow are appended together. For example:
