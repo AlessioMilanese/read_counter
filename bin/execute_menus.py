@@ -32,6 +32,12 @@ except ImportError:
     sys.exit(1)
 
 try:
+    import index as index2
+except ImportError:
+    sys.stderr.write("[E::main] Error: fail to load the script: "+relative_path+"/index.py\n")
+    sys.exit(1)
+
+try:
     import utilities
 except:
     sys.stderr.write("[E::main] Error: fail to load the script: "+relative_path+"/utilities.py\n")
@@ -181,7 +187,7 @@ def map(args):
 ################################################################################
 # INDEX command ----------------------------------------------------------------
 def index(args):
-    sys.exit(0)
+    index2.index(args.db,args.verbose)
 
 
 
