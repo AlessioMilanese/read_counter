@@ -50,7 +50,12 @@ def print_menu_map():
     sys.stderr.write("   -y  STR          type of read counts [insert.scaled_counts]\n")
     sys.stderr.write("                    Values: [base.coverage, insert.raw_counts, insert.scaled_counts]\n\n")
 
-
+def print_menu_index():
+    sys.stderr.write("\n")
+    sys.stderr.write("Usage: read_counter index -db <database> [options]\n\n")
+    sys.stderr.write("Input options:\n")
+    sys.stderr.write("   -db DIR    fasta file to be indexed\n")
+    sys.stderr.write("   -v  INT    verbose level: 1=error, 2=warning, 3=message, 4+=debugging [3]\n\n")
 
 
 # main function ----------------------------------------------------------------
@@ -114,7 +119,11 @@ def print_parse(version_tool):
 
 
     if args.command == 'index':
-        execute_menus.index(args)
+        if args.db is None:
+            print_menu_index()
+            sys.stderr.write("[E:main] Missing -db.\n")
+            sys.exit(0)
+
     if args.command == 'merge':
         execute_menus.merge(args)
 
