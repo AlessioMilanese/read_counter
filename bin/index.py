@@ -10,7 +10,7 @@ def index(fasta_file, verbose):
         sys.exit(1)
 
     # and second, create the .coord file
-    w = open(fasta_file+".coord","w")
+    w = open(fasta_file+".coords","w")
     gene_id = None
     fasta_seq = None
     with open(fasta_file, 'r') as f_h:

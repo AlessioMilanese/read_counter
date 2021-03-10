@@ -99,7 +99,7 @@ def getReferenceDict(geneLocationFileName):
 
             dictReference2geneLocation[strGeneName].append(geneInfoTuple)
     except:
-        sys.stderr.write("[E::calc_mgc] Error loading file: "+geneLocationFileName+"\n[E::calc_mgc] Try to download again the motus profiler\n\n")
+        sys.stderr.write("[E::calc_mgc] Error loading file1: "+geneLocationFileName+"\n[E::calc_mgc] Try to download again the motus profiler\n\n")
         sys.exit(1)
 
     return(dictReference2geneLocation)
@@ -122,7 +122,7 @@ def getGene2mOTUdict(gene2mOTUfileName):
 
             dictGene2mOTUs[strGeneName] = str_mOTU
     except:
-        sys.stderr.write("[E::calc_mgc] Error loading file: "+gene2mOTUfileName+"\n[E::calc_mgc] Try to download again the motus profiler\n\n")
+        sys.stderr.write("[E::calc_mgc] Error loading file2: "+gene2mOTUfileName+"\n[E::calc_mgc] Try to download again the motus profiler\n\n")
         sys.exit(1)
     return(dictGene2mOTUs)
 
@@ -146,7 +146,7 @@ def parse2columnFile_int(infileName):
 
             dictIn[strColumn_1_entry] = strColumn_2_entry
     except:
-        sys.stderr.write("[E::calc_mgc] Error loading file: "+infileName+"\n[E::calc_mgc] Try to download again the motus profiler\n\n")
+        sys.stderr.write("[E::calc_mgc] Error loading file3: "+infileName+"\n[E::calc_mgc] Try to download again the motus profiler\n\n")
         sys.exit(1)
 
 

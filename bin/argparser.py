@@ -71,15 +71,16 @@ def print_parse(version_tool):
 
     # --------------------------------------------------------------------------
     # special case: merge
-    if sys.argv[1] == "merge":
-        if len(sys.argv) == 2:
-            print_menu_merge()
-            sys.stderr.write("[E:main] No file selected.\n")
-            sys.exit(0)
-        else:
-            # there is `read_counter merge SOMETHING`
-            list_files = sys.argv[2:]
-            return "merge", list_files
+    if len(sys.argv) > 1:
+        if sys.argv[1] == "merge":
+            if len(sys.argv) == 2:
+                print_menu_merge()
+                sys.stderr.write("[E:main] No file selected.\n")
+                sys.exit(0)
+            else:
+                # there is `read_counter merge SOMETHING`
+                list_files = sys.argv[2:]
+                return "merge", list_files
 
 
 
