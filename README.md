@@ -44,7 +44,11 @@ You can test the installation with:
 ```
 ./test.sh
 ```
-
+If the tool is working correctly, the last two lines will be:
+```
+RESULT --------------------------------------------------------------
+You have the same result as the test
+```
 
 # Quick usage
 
