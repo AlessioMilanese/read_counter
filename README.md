@@ -57,4 +57,6 @@ geneD  1431  101  1531  cluster_3
 ```
 The reads that map to `geneA` and `geneC` are summed up and printed in the output under the id `cluster_1`.
 
+Note that by default, `read_counter index` will consider the genes to have no padding (i.e. column 3 is `1` and column 4 is equal to the length of the genes). Additionally, the fifth column (with the clusters) will be set equal to the gene ids. If you wish to change the padding or the clustering, you will need to manually change the `<fasta_id>.coords` file.
+
 ### Merge
