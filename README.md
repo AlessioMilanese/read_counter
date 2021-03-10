@@ -55,6 +55,6 @@ geneB   984  101  1084  cluster_2
 geneC  1737  101  1837  cluster_1
 geneD  1431  101  1531  cluster_3
 ```
-The reads that map to `geneA` and `geneC` are summed up and printed in the output under the id `cluster_2`.
+The reads that map to `geneA` and `geneC` are summed up and printed in the output under the id `cluster_1`.
 
 ### Merge
