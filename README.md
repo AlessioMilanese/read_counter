@@ -1,5 +1,30 @@
-Tool to count reads that map to a set of sequences.
+`read_counter` is a tool to count the number of reads (from a fastq file) that map to a set of nucleotide sequences (in a fasta format).
 
+# Table of contents
+
+* [Introduction](#introduction)
+* [Requirements](#requirements)
+* [Installation](#installation)
+* [Quick usage](#quick-usage)
+* [Advance usage](#advance-usage)
+    * [Count reads](#count-reads)
+    * [Index fasta](#index-fasta)
+    * [Merge](#merge)
+
+
+# Introduction
+
+# Requirements
+
+# Installation
+
+# Quick usage
+
+# Advance usage
+
+### Count reads
+
+### Index fasta
 
 The command `read_counter index` does two things:
 - First, it will first run `bwa index` internally on the input fasta file,
@@ -24,3 +49,6 @@ The gene length (column 2) is 12.
 The position where the gene starts (column 3) is 11, which corresponds to the `A` in `ATG` (if you start to count from 1).
 
 The position where the gene ends (column 4) is 22, which corresponds to the `A` in `TAA` (if you start to count from 1).
+
+
+### Merge
