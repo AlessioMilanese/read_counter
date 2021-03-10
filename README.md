@@ -17,4 +17,6 @@ This second file can be modified if you want to add padding or want to group the
 Regarding the second column, we count the number of bases in the gene.
 Example, in black there is the gene sequence (start codon: ATG and stop codon: TAA), and in grey there is the padding.
 
+![example_gene:AGGCATTTTT ATGCGGCAATAA GCGGGCGG](https://github.com/AlessioMilanese/read_counter/blob/master/pics/example_gene.png)
+
 The gene length is 12.
