@@ -6,8 +6,8 @@
 * [Requirements](#requirements)
 * [Installation](#installation)
 * [Quick usage](#quick-usage)
-* [Advance usage: Count reads](#advance-usage-count-reads)
 * [Advance usage: Index fasta](#advance-usage-index-fasta)
+* [Advance usage: Count reads](#advance-usage-count-reads)
 * [Advance usage: Merge](#advance-usage-merge)
 
 
@@ -84,7 +84,9 @@ read_counter merge test1.map test2.map
 ```
 
 
-# Advance usage: Count reads
+
+
+
 
 # Advance usage: Index fasta
 
@@ -120,6 +122,49 @@ geneD  1431  101  1531  cluster_3
 The reads that map to `geneA` and `geneC` are summed up and printed in the output under the id `cluster_1`.
 
 Note that by default, `read_counter index` will consider the genes to have no padding (i.e. column 3 is `1` and column 4 is equal to the length of the genes). Additionally, the fifth column (with the clusters) will be set equal to the gene ids. If you wish to change the padding or the clustering, you will need to manually change the `<fasta_id>.coords` file.
+
+
+
+
+
+
+# Advance usage: Count reads
+
+The main function of this tool is to count reads, which you can do using the command `map`.
+You will need to provide the fasta file (indexed before with `read_counter index`) with the `-db` option, as well as the fastq file(s).
+
+You can provide a single file with:
+```
+read_counter map -db test/test.fasta -s test/test.fq
+```
+
+Or, paired end reads:
+```
+read_counter map -db test/test.fasta -f test_forward.fq -r test_reverse.fq
+```
+
+Or both:
+```
+read_counter map -db test/test.fasta -f test_forward.fq -r test_reverse.fq -s single.fq
+```
+
+Additionally, you can analyse samples that have been sequenced across multiple lanes:
+```
+read_counter map -db test/test.fasta -f test_lane1_FW.fq,test_lane2_FW.fq -r test_lane1_RV.fq,test_lane2_RV.fq
+```
+
+If you want to merge multiple profiles, you will need to specify the name of the samples when running the `map` command. Example:
+```
+read_counter map -db test/test.fasta -s sample_34_1.fq -n sample_34_1
+```
+
+This will be the header of the produced read count file:
+```
+sample_34_1
+gene1   23.43782
+gene2   0.374823
+gene3   52.34783
+```
 
 # Advance usage: Merge
 
