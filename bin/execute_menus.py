@@ -49,7 +49,7 @@ except:
 ################################################################################
 # MAP command ------------------------------------------------------------------
 def map(args):
-    reference = "/Users/milanese/Desktop/read_couter_DB/test.fasta"
+    reference = args.db
     # if there are different lanes, we need to split them
     singles = list()
     forw = list()
