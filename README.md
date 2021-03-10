@@ -52,6 +52,29 @@ You have the same result as the test
 
 # Quick usage
 
+For your analysis you will have (at least) two files:
+- a fasta file with the sequence of the genes (database)
+- a set of reads in a fastq format (query)
+
+The first thing you have to do is to index the fasta file with the genes:
+```
+read_counter index -db test/test.fasta
+```
+
+where `test/test.fasta` is the file with the genes.
+
+Second, you need to map the fastq file(s) to the genes. In case you have only one fastq file, you can call:
+```
+read_counter map -db test/test.fasta -s test/test.fq
+```
+Where `test/test.fq` is the fastq file with the reads.
+
+In case you have paired end reads, and hence two files, you can run:
+```
+read_counter map -db test/test.fasta -f test_1.fq -r test_2.fq
+```
+
+
 # Advance usage
 
 ### Count reads
