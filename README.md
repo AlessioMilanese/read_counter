@@ -74,8 +74,18 @@ In case you have paired end reads, and hence two files, you can run:
 read_counter map -db test/test.fasta -f test_1.fq -r test_2.fq
 ```
 
+The result is printed on the screen (standard output), but you can save it to a file with the `-o` option.
+
+Finally, you might want to merge many profiles with the `merge` command:
+```
+read_counter map -db test/test.fasta -s test1.fq -o test1.map
+read_counter map -db test/test.fasta -s test2.fq -o test2.map
+read_counter merge test1.map test2.map
+```
 
 # Advance usage
+
+There are three commands that you can use: `index`, `map` and `merge`. We will now have a closer look at these commands.
 
 ### Count reads
 
@@ -115,3 +125,13 @@ The reads that map to `geneA` and `geneC` are summed up and printed in the outpu
 Note that by default, `read_counter index` will consider the genes to have no padding (i.e. column 3 is `1` and column 4 is equal to the length of the genes). Additionally, the fifth column (with the clusters) will be set equal to the gene ids. If you wish to change the padding or the clustering, you will need to manually change the `<fasta_id>.coords` file.
 
 ### Merge
+
+The `merge` command doesn't have any option. When you call `read_counter merge`, all the files that follow are appended together. For example:
+```
+read_counter merge test1.map test2.map
+```
+will put together the two files `test1.map` and `test2.map`. Note that if your terminal supports it, you can use wildcards:
+```
+read_counter merge test*.map
+```
+will merge all files with the pattern `test*.map`, example: `test1.map`, `test2.map`, `test_number45.map`, `testA.map`, etc.
