@@ -6,9 +6,9 @@
 * [Requirements](#requirements)
 * [Installation](#installation)
 * [Quick usage](#quick-usage)
-* [Advance usage: Count reads](#advance-usage:-count-reads)
-* [Advance usage: Index fasta](#advance-usage:-index-fasta)
-* [Advance usage: Merge](#advance-usage:-merge)
+* [Advance usage: Count reads](#advance-usage-count-reads)
+* [Advance usage: Index fasta](#advance-usage-index-fasta)
+* [Advance usage: Merge](#advance-usage-merge)
 
 
 
