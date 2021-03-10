@@ -44,11 +44,17 @@ Example, in black there is the gene sequence (start codon: ATG and stop codon: T
 
 ![example_gene:AGGCATTTTT ATGCGGCAATAA GCGGGCGG](https://github.com/AlessioMilanese/read_counter/blob/master/pics/example_gene.png)
 
-The gene length (column 2) is 12.
+- The gene length (column 2) is 12.
+- The position where the gene starts (column 3) is 11, which corresponds to the `A` in `ATG` (if you start to count from 1).
+- The position where the gene ends (column 4) is 22, which corresponds to the `A` in `TAA` (if you start to count from 1).
 
-The position where the gene starts (column 3) is 11, which corresponds to the `A` in `ATG` (if you start to count from 1).
-
-The position where the gene ends (column 4) is 22, which corresponds to the `A` in `TAA` (if you start to count from 1).
-
+Regarding the last column, it's helpful to specify genes that belong to the same cluster and should be counted together. Example of a `<fasta_id>.coords`:
+```
+geneA  1494  101  1594  cluster_1
+geneB   984  101  1084  cluster_2
+geneC  1737  101  1837  cluster_1
+geneD  1431  101  1531  cluster_3
+```
+The reads that map to `geneA` and `geneC` are summed up and printed in the output under the id `cluster_2`.
 
 ### Merge
