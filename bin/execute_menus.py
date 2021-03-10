@@ -1,5 +1,7 @@
 import sys
 import os
+import shutil
+import tempfile
 
 # position of the script -------------------------------------------------------
 path_this = os.path.realpath(__file__)
@@ -18,9 +20,9 @@ except:
     sys.exit(1)
 
 try:
-    import map_genes_to_mOTUs as map_motu
+    import count_reads as count_reads
 except:
-    sys.stderr.write("[E::main] Error: fail to load the script: "+relative_path+"/map_genes_to_mOTUs.py\n")
+    sys.stderr.write("[E::main] Error: fail to load the script: "+relative_path+"/count_reads.py\n")
     sys.exit(1)
 
 try:
@@ -36,9 +38,12 @@ except:
     sys.exit(1)
 
 #################################  COMMANDS  ###################################
+
+
+################################################################################
 # MAP command ------------------------------------------------------------------
 def map(args):
-    reference = "/Users/milanese/Dropbox/PhD/mOTUsv2_tool/2.5.1/mOTUs_v2/db_mOTU/db_mOTU_DB_CEN.fasta"
+    reference = "/Users/milanese/Desktop/read_couter_DB/test.fasta"
     # if there are different lanes, we need to split them
     singles = list()
     forw = list()
@@ -104,9 +109,7 @@ def map(args):
 
 #-------# map genes ------------------------------------------------------------
     # prepare inputs
-    listInputFiles = ['unused list']
-    database_prefix = DATABASE_prefix
-    database_dir = DATABASE
+    file_data_coords = reference + ".coords"
     sample_name = "trial"
     if (args.sampleName is not None): sample_name = args.sampleName
     multThreshold = 3
@@ -114,9 +117,6 @@ def map(args):
     loserThreshold = 0.01
 
     output = ""
-    msam_script = relative_path+"bin/msamtools_python.py"
-    return_dictionary = True
-    profile_mode = True
 
     # choose the proper value for min_len_align -------------------
     min_len_align = args.min_len_align_length
@@ -135,29 +135,20 @@ def map(args):
 
 
     # we have to filter the sam lines if they are not given as input -- note that the filtering (inside the second script) is done only for the one that are loaded, and not during bwa
-    all_sam_lines_input_map_motu = filter_sam.run_all_lines((args.min_perc_id/100),min_len_align,args.min_perc_align,all_sam_lines)
+    #all_sam_lines_input_count_reads = filter_sam.run_all_lines((args.min_perc_id/100),min_len_align,args.min_perc_align,all_sam_lines)
+    all_sam_lines_input_count_reads = all_sam_lines
 
 
-    version_information_map_read,mOTU_counts = map_motu.run_mOTUs_v2_mapping(listInputFiles, database_dir, database_prefix, sample_name, multThreshold, winnerThreshold, loserThreshold, minClippedAlignLength, output, msam_script, args.type_output,args.verbose,profile_mode,all_sam_lines_input_map_motu,return_dictionary, args.min_perc_id,min_len_align,args.min_perc_align)
-
-    # header for mgc table ----------------
-    mgc_table_header = "# "
-    if version_information_map_read != "no_info":
-        mgc_table_header = mgc_table_header + version_information_map_read + " | "
-    else:
-        mgc_table_header = mgc_table_header + first_script_header + " | "
-    # add info of the parameters
-    mgc_table_header = mgc_table_header + "calc_mgc "+versions["map_genes_to_mOTUs"]+" -y "+args.type_output+" "+info_parameters_p
+    read_counts = count_reads.count_reads(file_data_coords, sample_name, multThreshold, winnerThreshold, loserThreshold, minClippedAlignLength, output, args.type_output,args.verbose,all_sam_lines_input_count_reads, args.min_perc_id,min_len_align,args.min_perc_align)
 
 
     #save the mOTU read count, actually the mgc table
-    if args.profile_mOTU_reads_file is not None:
+    if args.output is not None:
         try:
             mgc_temp_file = tempfile.NamedTemporaryFile(delete=False, mode="w")
             os.chmod(mgc_temp_file.name, 0o644)
-            mgc_temp_file.write(mgc_table_header+"\n")
             mgc_temp_file.write(sample_name+"\n")
-            for m, value in sorted(mOTU_counts.items()):
+            for m, value in sorted(read_counts.items()):
                 mgc_temp_file.write("{0}\t{1:.10f}\n".format(m, value))
         except:
             sys.stderr.write("[W::main] Warning: failed to save the intermediate mgc table\n")
@@ -170,19 +161,31 @@ def map(args):
         except:
             sys.stderr.write("[W::main] Warning: failed to save the intermediate mgc table\n")
         try:
-            #os.rename(mgc_temp_file.name,args.profile_mOTU_reads_file) # atomic operation
-            shutil.move(mgc_temp_file.name,args.profile_mOTU_reads_file) #It is not atomic if the files are on different filsystems.
+            #os.rename(mgc_temp_file.name,args.output) # atomic operation
+            shutil.move(mgc_temp_file.name,args.output) #It is not atomic if the files are on different filsystems.
         except:
             sys.stderr.write("[W::main] Warning: failed to save the intermediate mgc table\n")
             sys.stderr.write("[W::main] you can find the file here:\n"+mgc_temp_file.name+"\n")
-
+    else:
+        # we print to stdout
+        print(sample_name)
+        for m, value in sorted(read_counts.items()):
+            print("{0}\t{1:.10f}".format(m, value))
 
     sys.exit(0)
 
+
+
+
+
+################################################################################
 # INDEX command ----------------------------------------------------------------
 def index(args):
     sys.exit(0)
 
+
+
+################################################################################
 # MERGE command ----------------------------------------------------------------
 def merge(args):
     sys.exit(0)

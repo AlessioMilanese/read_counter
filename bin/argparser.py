@@ -124,5 +124,8 @@ def print_parse(version_tool):
     if (args.type_output is None): args.type_output = 'insert.scaled_counts'
     if (args.min_len_align_length is None): args.min_len_align_length = 75
 
+    if (args.min_perc_id is None): args.min_perc_id = 97
+    if (args.min_perc_align is None): args.min_perc_align = 45
+
     # return args
     return args
