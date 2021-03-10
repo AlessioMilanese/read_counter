@@ -19,4 +19,8 @@ Example, in black there is the gene sequence (start codon: ATG and stop codon: T
 
 ![example_gene:AGGCATTTTT ATGCGGCAATAA GCGGGCGG](https://github.com/AlessioMilanese/read_counter/blob/master/pics/example_gene.png)
 
-The gene length is 12.
+The gene length (column 2) is 12.
+
+The position where the gene starts (column 3) is 11, which corresponds to the `A` in `ATG` (if you start to count from 1).
+
+The position where the gene ends (column 4) is 22, which corresponds to the `A` in `TAA` (if you start to count from 1).
