@@ -42,8 +42,7 @@ def print_menu_map():
     sys.stderr.write("   -n  STR          sample name [default: file name]\n")
     sys.stderr.write("   -db DIR          provide a database created with `read_counter index` [required]\n\n")
     sys.stderr.write("Output options:\n")
-    sys.stderr.write("   -o  FILE         output file name [stdout]\n")
-    sys.stderr.write("   -I  FILE         save the result of bwa in bam format (intermediate step) [None]\n\n")
+    sys.stderr.write("   -o  FILE         output file name [stdout]\n\n")
     sys.stderr.write("Algorithm options:\n")
     sys.stderr.write("   -l  INT          min. length of alignment for the reads (number of nucleotides) [75]\n")
     sys.stderr.write("   -t  INT          number of threads [1]\n")
@@ -109,7 +108,6 @@ def print_parse(version_tool):
 
     # others
     parser.add_argument('-t', type=int, action="store", dest='threads', default=None, help='Number of threads to be used.')
-    parser.add_argument('-I', action="store", default=None, dest='profile_bam_file', help='name of the bam file to save the intermediate bam file during profiling')
 
     # filters
     parser.add_argument('-min_perc_id', action="store", default=None, dest='min_perc_id', help='minimum percentage of identity when filtering - choose between 97 and 100')
