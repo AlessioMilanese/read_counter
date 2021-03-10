@@ -204,21 +204,21 @@ def merge(file_list):
     for f in file_list:
         # first we set all to zeros
         for u in values:
-            values[u].append(0)
+            values[u].append("0")
         # now we check if adding new or replacing the zero we just added
         o = open(f,"r")
-        headers.append(o.readline())
+        headers.append(o.readline().rstrip())
         for line in o:
             vals = line.rstrip().split("\t")
             if not vals[0] in values:
-                values[u] = [0]*len(headers)
-            values[u][-1] = vals[1]
+                values[vals[0]] = ["0"]*len(headers)
+            values[vals[0]][-1] = str(vals[1])
         o.close()
     # print result
     print("\t".join(headers))
     # find order for the values
-    clusters = values.keys()
+    clusters = list(values.keys())
     clusters.sort()
     for c in clusters:
-        print("\t".join([c]+clusters[c]))
+        print("\t".join([c]+values[c]))
     sys.exit(0)
