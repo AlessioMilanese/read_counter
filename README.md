@@ -14,9 +14,37 @@
 
 # Introduction
 
+Count reads that map to a set of genes is not always easy. If the genes are similar to each other, there will be reads that map to multiple genes with the same quality. Moreover, even if reads map to a gene, we would like to be able to filter only the high quality reads.
+
+When working with gene catalog, we also have many genes that map to the same cluster. When counting the reads in this case, we would like to use the clusters as a unit count and not the single genes.
+
+If you need to map reads from a metagenomic sample to a set of genes, you can use `read_counter`.
+
+
+
+
 # Requirements
 
+To run `read_counter` you will need:
+The mOTU profiler requires:
+* Python 3 (or higher)
+* the Burrow-Wheeler Aligner v0.7.15 or higher ([bwa](https://github.com/lh3/bwa))
+
+
+
 # Installation
+
+```bash
+git clone https://github.com/AlessioMilanese/read_counter.git
+cd read_counter
+export PATH=`pwd`:$PATH
+```
+
+You can test the installation with:
+```
+./test.sh
+```
+
 
 # Quick usage
 
