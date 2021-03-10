@@ -6,10 +6,10 @@
 * [Requirements](#requirements)
 * [Installation](#installation)
 * [Quick usage](#quick-usage)
-* [Advance usage](#advance-usage)
-    * [Count reads](#count-reads)
-    * [Index fasta](#index-fasta)
-    * [Merge](#merge)
+* [Advance usage: Count reads](#advance-usage:-count-reads)
+* [Advance usage: Index fasta](#advance-usage:-index-fasta)
+* [Advance usage: Merge](#advance-usage:-merge)
+
 
 
 # Introduction
@@ -83,13 +83,10 @@ read_counter map -db test/test.fasta -s test2.fq -o test2.map
 read_counter merge test1.map test2.map
 ```
 
-# Advance usage
 
-There are three commands that you can use: `index`, `map` and `merge`. We will now have a closer look at these commands.
+# Advance usage: Count reads
 
-### Count reads
-
-### Index fasta
+# Advance usage: Index fasta
 
 The command `read_counter index` does two things:
 - First, it will first run `bwa index` internally on the input fasta file,
@@ -124,7 +121,7 @@ The reads that map to `geneA` and `geneC` are summed up and printed in the outpu
 
 Note that by default, `read_counter index` will consider the genes to have no padding (i.e. column 3 is `1` and column 4 is equal to the length of the genes). Additionally, the fifth column (with the clusters) will be set equal to the gene ids. If you wish to change the padding or the clustering, you will need to manually change the `<fasta_id>.coords` file.
 
-### Merge
+# Advance usage: Merge
 
 The `merge` command doesn't have any option. When you call `read_counter merge`, all the files that follow are appended together. For example:
 ```
