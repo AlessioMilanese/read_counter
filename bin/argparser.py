@@ -1,5 +1,6 @@
 import argparse
 import sys
+import glob
 
 version_tool_this = "dummy"
 
@@ -57,11 +58,31 @@ def print_menu_index():
     sys.stderr.write("   -db DIR    fasta file to be indexed\n")
     sys.stderr.write("   -v  INT    verbose level: 1=error, 2=warning, 3=message, 4+=debugging [3]\n\n")
 
+def print_menu_merge():
+    sys.stderr.write("\n")
+    sys.stderr.write("Usage: read_counter merge <file list>\n\n")
+    sys.stderr.write("Note, the files can be specified using bash wildcards (like `*` or `.`)\n")
+
 
 # main function ----------------------------------------------------------------
 def print_parse(version_tool):
     global version_tool_this
     version_tool_this = version_tool
+
+    # --------------------------------------------------------------------------
+    # special case: merge
+    if sys.argv[1] == "merge":
+        if len(sys.argv) == 2:
+            print_menu_merge()
+            sys.stderr.write("[E:main] No file selected.\n")
+            sys.exit(0)
+        else:
+            # there is `read_counter merge SOMETHING`
+            list_files = sys.argv[2:]
+            return "merge", list_files
+
+
+
     # commands ---------------------------------------------------------------------
     parser = argparse.ArgumentParser(usage=msg(), formatter_class=CapitalisedHelpFormatter,add_help=False)
     #parser = argparse.ArgumentParser(description='This program calculates mOTU-LGs and specI abundances for one sample', add_help = True)
@@ -125,7 +146,7 @@ def print_parse(version_tool):
             sys.exit(0)
 
     if args.command == 'merge':
-        execute_menus.merge(args)
+        print_menu_merge()
 
     # set defaults -------------------------------------------------------------
     if (args.verbose is None): args.verbose = 3
@@ -137,4 +158,4 @@ def print_parse(version_tool):
     if (args.min_perc_align is None): args.min_perc_align = 45
 
     # return args
-    return args
+    return args.command, args
