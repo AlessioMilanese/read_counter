@@ -180,7 +180,7 @@ Finally, you can decide what to count with the `-y` command:
 
 
 An example can be seen here:
-![example_read_count(https://github.com/AlessioMilanese/read_counter/blob/master/pics/read_count_example.png)
+![example_read_count](https://github.com/AlessioMilanese/read_counter/blob/master/pics/read_count_example.png)
 
 Where the blue lines are reads (12 in totals) and the black lines are genes.
 
